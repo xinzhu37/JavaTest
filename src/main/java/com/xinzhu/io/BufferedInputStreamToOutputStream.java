@@ -1,31 +1,29 @@
 package com.xinzhu.io;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 
-public class FileInputStreamToOutputStream {
+public class BufferedInputStreamToOutputStream {
     public static void main(String[] args) throws IOException {
-        FileInputStream fis = null;
-        FileOutputStream fos = null;
+        BufferedInputStream bis = null;
+        BufferedOutputStream bos = null;
         // 记录开始时间
         long start = System.currentTimeMillis();
         try {
             // 使用文件名称创建流对象
-            fis = new FileInputStream("D:\\IEDownload\\VMware-workstation-full-16.1.0-17198959.exe");
-            fos = new FileOutputStream("C:\\Users\\xinzhu\\Desktop\\dddd2.exe",true);
-            int read = 0;
-            byte[] bytes = new byte[1024];
-            while ((read = fis.read(bytes)) != -1){
+            bis = new BufferedInputStream(new FileInputStream("D:\\IEDownload\\VMware-workstation-full-16.1.0-17198959.exe"));
+            bos = new BufferedOutputStream(new FileOutputStream("C:\\Users\\xinzhu\\Desktop\\dddd3.exe",true));
+            int read;
+            byte[] bytes = new byte[8*1024];
+            while ((read = bis.read(bytes)) != -1){
                 //                System.out.println(new String(bytes,0,read));
-                fos.write(bytes,0,read);
+                bos.write(bytes,0,read);
             }
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
             try {
-                fis.close();
-                fos.close();
+                bis.close();
+                bos.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
