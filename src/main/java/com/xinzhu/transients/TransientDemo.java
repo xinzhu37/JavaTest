@@ -46,7 +46,8 @@ public class TransientDemo {
         }
 
         // 反序列化之前先改变static、final关键字修饰的变量
-        UserInfo.name = "zhnagsadc";
+//        userInfo1. = 23;
+
 
         // fan序列化
         FileInputStream fis = null;
@@ -54,8 +55,8 @@ public class TransientDemo {
             // 创建对象流
             fis = new FileInputStream("TransientDemo.txt");
             ObjectInputStream oos = new ObjectInputStream(fis);
-            ArrayList users = (ArrayList) oos.readObject();
-            for (Object user : users) {
+            ArrayList<UserInfo> users = (ArrayList) oos.readObject();
+            for (UserInfo user : users) {
                 System.out.println(user.toString());
             }
             System.out.println("read serializer success!");

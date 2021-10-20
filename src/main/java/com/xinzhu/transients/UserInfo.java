@@ -7,9 +7,9 @@ import java.io.Serializable;
  */
 public class UserInfo implements Serializable{
     private final static long serialVersionUID = 2L;
-    public static String name;
+    public String name;
     public transient String address;
-    public final transient int age = 123;
+    public final transient int age = 23;
     public final int RNG = 10086;
 
     public UserInfo() {
@@ -39,11 +39,17 @@ public class UserInfo implements Serializable{
 //        this.age = age;
 //    }
 
+    public int getRNG() {
+        return RNG;
+    }
+
+    @Override
     public String toString() {
         return "UserInfo{" +
                 "name='" + name + '\'' +
                 ", address='" + address + '\'' +
                 ", age=" + age +
+                ", RNG=" + RNG +
                 '}';
     }
 }
