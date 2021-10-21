@@ -1,8 +1,6 @@
 package com.xinzhu.stream;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -58,5 +56,36 @@ public class StreamTest {
         System.out.println(reduce.get());
 
 
+        List<Person> personList = new ArrayList<Person>();
+        personList.add(new Person("Tom", 8900, 23, "male", "New York"));
+        personList.add(new Person("Jack", 7000, 25, "male", "Washington"));
+        personList.add(new Person("Lily", 7800, 21, "female", "Washington"));
+        personList.add(new Person("Anni", 8200, 24, "female", "New York"));
+
+        // 归集，流在处理完数据之后还是个流，最后要将流转换为集合，如list、set、map
+        List<Integer> collectList = list.stream().filter(x -> x > 6).collect(Collectors.toList());
+        Set<Integer> collectSet = list.stream().filter(x -> x > 6).collect(Collectors.toSet());
+        Map<String, Person> personMap = personList.stream().filter(person -> person.getSalary() > 8000).collect(Collectors.toMap(Person::getName, person -> person));
+        System.out.println("collectList = " + collectList);
+        System.out.println("collectSet = " + collectSet);
+        System.out.println("personMap.get(\"Tom\") = " + personMap.get("Tom"));
+
+        personList.stream().collect(Collectors.averagingInt(Person::getSalary));
+        System.out.println(personList.stream().collect(Collectors.summingInt(Person::getSalary)));
+        System.out.println(personList.stream().collect(Collectors.maxBy(Comparator.comparingInt(Person::getSalary))));
+        System.out.println(personList.stream().collect(Collectors.summarizingInt(Person::getSalary)));
+
+        // joining接合
+        String collect1 = list.stream().collect(Collectors.toSet()).stream().map(Integer::toUnsignedString).collect(Collectors.joining("-"));
+        System.out.println("collect1 = " + collect1);
+
+        // 提取、组合
+        String[] arr1 = { "a", "b", "c", "d" };
+        String[] arr2 = { "d", "e", "f", "g" };
+        Integer[] int3 = {1,2,3,5,6,7,9,10,11,13,14,15,17,18,19};
+        List<String> collect2 = Stream.concat(Stream.of(arr1), Stream.of(arr2)).distinct().collect(Collectors.toList());
+        System.out.println("collect2 = " + collect2);
+        List<Integer> collect3 = Arrays.stream(int3).skip(3).limit(8).collect(Collectors.toList());
+        System.out.println("collect3 = " + collect3);
     }
 }

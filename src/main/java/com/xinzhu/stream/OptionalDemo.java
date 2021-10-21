@@ -11,8 +11,8 @@ public class OptionalDemo {
     public static void main(String[] args) {
         List<Person> personList = new ArrayList<>();
         personList.add(new Person("SongJia",20000,22,"female","新加坡"));
-        personList.add(new Person("CaoYiMen",5000,23,"male","英格兰"));
-        personList.add(new Person("LiXinYu",6000,24,"female","法国"));
+        personList.add(new Person("CaoYiMen",5000,26,"male","英格兰"));
+        personList.add(new Person("LiXinYu",5000,24,"female","法国"));
         personList.add(new Person("ShenBeiNa",8000,25,"male","China"));
 
         Stream<String> collect = personList.stream().filter(person -> person.getSalary() > 7000).map(Person::getName);
@@ -76,5 +76,47 @@ public class OptionalDemo {
 
 //        Optional<Integer> reduce = personList.stream().map(Person::getSalary).reduce();
 //        System.out.println(reduce.get());
+
+        // 分组，将薪资是否高于8000的分为两部分，按照性别和地区分为两部分
+        Map<Boolean, List<Person>> partitioningSalary = personList.stream().collect(Collectors.partitioningBy(person -> person.getSalary() > 8000));
+        Map<String, List<Person>> groupingSex = personList.stream().collect(Collectors.groupingBy(person -> person.getSex()));
+        Map<String, Map<String, List<Person>>> groupingSexArea = personList.stream().collect(Collectors.groupingBy(Person::getSex,Collectors.groupingBy(Person::getArea)));
+        System.out.println("partitioningSalary = " + partitioningSalary);
+        System.out.println("groupingSex = " + groupingSex);
+        System.out.println("groupingSexArea = " + groupingSexArea);
+
+        // joining接合
+        String joinName = personList.stream().map(Person::getName).collect(Collectors.joining("-"));
+        System.out.println("joinName = " + joinName);
+
+        // 归集里的规约，相对于Stream里面的规约增加了自定义的
+        Integer collect2 = personList.stream().collect(Collectors.reducing(0,Person::getSalary,(x, y) -> x + y - 500));
+        System.out.println("collect2 = " + collect2);
+
+        Optional<Integer> reduce = personList.stream().map(Person::getSalary).reduce(Integer::sum);
+        System.out.println("reduce = " + reduce);
+
+        // 排序，先按照薪资排序，在按照年龄排序
+        Stream<Person> sortedSalary = personList.stream().sorted(Comparator.comparing(Person::getSalary));
+//        sortedSalary.forEach(System.out::println);
+        System.out.println("sortedSalary = " + sortedSalary);
+        Stream<Person> sortedAge = personList.stream().sorted(Comparator.comparing(Person::getAge).reversed());
+//        sortedAge.forEach(System.out::println);
+        System.out.println("sortedAge = " + sortedAge);
+        Stream<Person> sortedSalaryAge = personList.stream().sorted(Comparator.comparing(Person::getSalary).thenComparing(Person::getAge));
+//        sortedSalaryAge.forEach(System.out::println);
+        System.out.println("sortedSalaryAge = " + sortedSalaryAge);
+        Stream<Person> sortedSalaryAge2 = personList.stream().sorted(Comparator.comparing(Person::getSalary).thenComparing(Person::getAge).reversed());
+        sortedSalaryAge2.forEach(System.out::println);
+        System.out.println("sortedSalaryAge3 = " + sortedSalaryAge2);
+        Stream<Person> sortedSalaryAge3 = personList.stream().sorted((p1,p2) -> {
+            if (p1.getSalary() == p2.getSalary()){
+                return p2.getAge() - p1.getAge();
+            }
+            return p1.getSalary() - p2.getSalary();
+        });
+        sortedSalaryAge3.forEach(System.out::println);
+        System.out.println("sortedSalaryAge3 = " + sortedSalaryAge3);
+
     }
 }
