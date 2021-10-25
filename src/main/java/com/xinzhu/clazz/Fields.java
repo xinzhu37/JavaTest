@@ -29,8 +29,14 @@ public class Fields {
 
             System.out.println("*************获取公有字段**并调用***********************************");
             Field name = clazz.getDeclaredField("name");
-            System.out.println("name = " + name);
+            Object stu = clazz.newInstance();
+            name.set(stu,"宋江");
+            System.out.println("name = " + stu);
         } catch (ClassNotFoundException | NoSuchFieldException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
             e.printStackTrace();
         }
     }
