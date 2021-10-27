@@ -3,7 +3,7 @@ package com.xinzhu.stream;
 /**
  * Create By GuoFZ on 2021/10/20
  */
-public class Person {
+public class Person implements Comparable<Person>{
     private String name;  // 姓名
     private int salary; // 薪资
     private int age; // 年龄
@@ -61,14 +61,19 @@ public class Person {
         this.area = area;
     }
 
-//    @Override
-//    public String toString() {
-//        return "Person{" +
-//                "name='" + name + '\'' +
-//                ", salary=" + salary +
-//                ", age=" + age +
-//                ", sex='" + sex + '\'' +
-//                ", area='" + area + '\'' +
-//                '}';
-//    }
+    @Override
+    public String toString() {
+        return "Person{" +
+                "name='" + name + '\'' +
+                ", salary=" + salary +
+                ", age=" + age +
+                ", sex='" + sex + '\'' +
+                ", area='" + area + '\'' +
+                '}';
+    }
+
+    @Override
+    public int compareTo(Person o) {
+        return this.getSalary() - o.getSalary();
+    }
 }
