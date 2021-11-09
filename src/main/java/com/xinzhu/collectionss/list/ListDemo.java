@@ -15,7 +15,7 @@ public class ListDemo {
         // 先初始化数据
         list.add("李清照");
         list.add("辛弃疾");
-        list.add("断离舍");
+        list.add("断舍离");
         list.add("周树人");
 
         // 添加，而不是替换原有的索引对应的值
@@ -50,5 +50,11 @@ public class ListDemo {
         list.remove("周树人");
         list.remove(5);
         System.out.println("list = " + list);
+    }
+    public static void change(int a, int b) {
+        a = a + b; b = b + a;
+    }
+    public static void change(int[] arr) {
+        arr[0] = 200;
     }
 }
