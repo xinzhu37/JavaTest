@@ -9,5 +9,7 @@ public class ArraysDemo {
         nameSystems[0].setName("");
         Math.max(2,3);
         System.out.println("cccccccccccc");
+        System.out.println("aaaaaaaaaaaaaa");
+        System.out.println("sddddddddddddd");
     }
 }
