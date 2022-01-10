@@ -8,6 +8,6 @@ public class ArraysDemo {
         NameSystem[] nameSystems = new NameSystem[3];
         nameSystems[0].setName("");
         Math.max(2,3);
-        System.out.println("aaaaaaaaaaaaaa");
+        System.out.println("cccccccccccc");
     }
 }
