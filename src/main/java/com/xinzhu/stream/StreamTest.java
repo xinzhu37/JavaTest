@@ -89,6 +89,7 @@ public class StreamTest {
         System.out.println("collect3 = " + collect3);
         System.out.println("1111111111111");
         System.out.println("2222222222222");
+        System.out.println("3333333333333");
 
     }
 }
