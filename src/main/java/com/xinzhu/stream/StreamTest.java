@@ -87,5 +87,7 @@ public class StreamTest {
         System.out.println("collect2 = " + collect2);
         List<Integer> collect3 = Arrays.stream(int3).skip(3).limit(8).collect(Collectors.toList());
         System.out.println("collect3 = " + collect3);
+        System.out.println("1111111111111")
+
     }
 }
