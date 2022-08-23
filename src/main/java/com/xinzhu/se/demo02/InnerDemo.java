@@ -16,6 +16,9 @@ public class InnerDemo {
         //数组也是引用类型,存储在堆中
         int[] array = {1,2,3};
         Object[] array2 = {"a","b"};
+        System.out.println("增加远程分支");
+        System.out.println("1.现在是分支20220823");
+        System.out.println("分支新增的东西");
 
         Object obj = array;
         Object obj2 = array2;
