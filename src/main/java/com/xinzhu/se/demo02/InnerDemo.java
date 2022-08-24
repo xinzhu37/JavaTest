@@ -17,6 +17,7 @@ public class InnerDemo {
         int[] array = {1,2,3};
         Object[] array2 = {"a","b"};
 
+        System.out.println("切换用户");
         Object obj = array;
         Object obj2 = array2;
     }
